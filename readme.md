@@ -27,7 +27,7 @@ constructor.instructions = analyzer.instructionSequence
 constructor.analyze()
 ```
 
-## Vulnerable GPU Application and 
+## Vulnerable GPU Application and Proof-of-Concept ROP Chains
 
 ```
 cd vulnerableGPUApp
@@ -35,7 +35,7 @@ make dbg=1
 ./build/vuln <path to input file>
 ```
 
-## Cite this work
+## Cite this Work
 Read our paper: https://adriaanjacobs.github.io/files/eurosec2025cudawouldashoulda.pdf
 ```
 @article{roels2025cuda,
