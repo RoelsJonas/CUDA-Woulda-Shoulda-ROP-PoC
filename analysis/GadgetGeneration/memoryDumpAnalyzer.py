@@ -278,7 +278,6 @@ class rawDumpAnalyzer:
                 thirdInput = decodeReg(self.instructionSequence[i].opcode2, 14)
                 lut = int(self.instructionSequence[i].opcode2[12:14], 16)
                 self.instructionSequence[i].decoded += "LOP3.LUT" + " R" + str(destRegNr) + ", R" + str(sourceRegNr) + ", " + hex(offset) + ", R" + str(thirdInput) + ", " + hex(lut) + " !PT TODO"
-                # instructionSequence[i].decoded += "LOP3.LUT TODO"
 
             if(self.instructionSequence[i].opcode1[13:] == "38a"):
                 destRegNr = decodeReg(self.instructionSequence[i].opcode1, 10)
@@ -327,11 +326,6 @@ class rawDumpAnalyzer:
                 sourceRegNr = decodeReg(self.instructionSequence[i].opcode1, 8)
                 offset = int(self.instructionSequence[i].opcode1[0:8], 16)
                 predicate = int(self.instructionSequence[i].opcode2[9:11], 16) >> 3
-                # predicate = int(instructionSequence[i].opcode2[9], 16) << 1
-                # if predicate > 7:
-                #     predicate = "!P" + str(predicate - 8)
-                # else:
-                #     predicate = "P" + str(predicate)
                 self.instructionSequence[i].decoded += "SEL R" + str(destRegNr) + ", R" + str(sourceRegNr) + ", " + hex(offset) + ", P" + str(predicate)
 
             if(self.instructionSequence[i].opcode1[13:] == "819"):

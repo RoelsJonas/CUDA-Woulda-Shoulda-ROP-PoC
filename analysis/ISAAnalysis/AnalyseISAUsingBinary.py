@@ -87,10 +87,6 @@ class BinToISA:
                                 f.write("[" + str(subOp.opLocations[opIndex][0]) + "]")
                             else:
                                 f.write("{" + str(len(subOp.opLocations[opIndex])) + "}")
-                        # for loc in subOp.opLocations[opIndex]:
-                        #     if loc in [14,15,16,17,21,22,23,24,25,26]:
-                        #         continue
-                        #     f.write("[" + str(loc) + "]")
                         f.write(", ")
                     f.write("\n")
                 f.write("\n")
@@ -181,13 +177,6 @@ class InstructionType:
                     # check if part is R followed by 1 or 2 numbers
                     elif((len(part) >= 3 and part[0] == "U" and part[1] == "R" and (part[2].isdigit() or part[2] == "Z")) or (len(part) >= 4 and (part[0] == "!" or part[0] == "-" or part[0] == "~") and part[1] == "U" and part[2] == "R" and (part[3].isdigit() or part[3] == "Z"))):
                         opType = "U-Rn"
-                        # for i in range(0, 32, 2):
-                        #     ind = i + 2
-                        #     if i > 15:
-                        #         ind += 3
-                        #     # print(i, ind, part, self.permutations[permutation][ind:ind+2])
-                        #     if(part.replace("UR", "").replace(",", "") == str(decodeReg(self.permutations[permutation], ind))):
-                        #         opLoc.append(i)
                     
                     # check if part is P followed by 1
                     elif(len(part) >= 2 and part[0] == "P" and (part[1].isdigit() or part[1] == "T") or (len(part) >= 3 and part[0] == "!" and part[1] == "P" and (part[2].isdigit() or part[2] == "T"))):
@@ -263,23 +252,12 @@ class InstructionType:
                         self.subOps[subOp.subOp].operands[index] = opType
                     
                     elif(opType not in self.subOps[subOp.subOp].operands[index]):
-                        # print()
-                        # print("Error: Operand type mismatch")
-                        # print("Permutation: " + permutation)
-                        # print("Index: " + str(index))
-                        # print("Part: " + part)
-                        # print("OpType: " + opType)
-                        # print("Previous: " + self.subOps[subOp.subOp].operands[index])
-                        # print()
                         self.subOps[subOp.subOp].operands[index] += "/" + opType
                     
                     if(index not in self.subOps[subOp.subOp].opLocations):
                         if(len(opLoc) > 0):
                             self.subOps[subOp.subOp].opLocations[index] = opLoc
-                        # elif(opType in ["Rn", "Pn"]):
-                        #     print("No loc found for:", permutation + ";", part, self.permutations[permutation])
-                        #     print()
-                
+
 
                     # refine oplocs, must be in the object already and in our arrary
                     elif len(opLoc) > 0:
@@ -288,14 +266,6 @@ class InstructionType:
                             if loc in self.subOps[subOp.subOp].opLocations[index] and loc not in [14,15,16,17,21,22,23,24,25,26]:
                                 newOpLocs.append(loc)
                         self.subOps[subOp.subOp].opLocations[index] = newOpLocs
-
-                    # elif(opType in ["Rn", "Pn"]):
-                    #         print("No loc found for:", permutation + ";", part, self.permutations[permutation])
-                    #         print()
-                
-
-                    
-
                     index += 1
 
 
