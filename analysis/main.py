@@ -16,4 +16,4 @@ from ISAAnalysis import AnalyseISAUsingBinary as aib
 # TuringISA.analyzeDump("<path to dumped fatbin>")
 # TuringISA.printOpcodes(True)
 # TuringISA.analyzeSubOps()
-# TuringISA.generateReport("opcodes_SM75.md")
+# TuringISA.generateReport("<output file path>")
